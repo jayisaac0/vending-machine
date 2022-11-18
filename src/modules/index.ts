@@ -21,6 +21,7 @@ export const machine = (args: VendingMachineType) =>{
 
 export const updateMachine = (args: VendingMachineUpdateType, slot: string) =>{
     
+    
     if (vending.some((el) => el.slot === slot)) {
         const item = vending.findIndex((el) => el.slot === slot)
         /**
@@ -34,11 +35,15 @@ export const updateMachine = (args: VendingMachineUpdateType, slot: string) =>{
             }
         });
         return vending 
+    }else{
+        /**
+         * return up to date vending machine information
+         */    
+        return {
+            mesasge: "Sorry can not update an item that is not available",
+            response: vending
+        }
     }
-    /**
-     * return up to date vending machine information
-     */    
-    return vending;
 }
 
 export const createDenomination = (args: DenominationType) => {
@@ -66,8 +71,15 @@ export const updateDenominationCoins = (args: DenominationUpdateType, denominati
             denominations[item].coins += args.coins;
         });
         return denominations;
+    }else{
+        /**
+         * return up to date vending machine coins
+         */    
+         return {
+            mesasge: "Sorry can not update coins of a unavailable denomination",
+            response: vending
+        }        
     }
-    return denominations;
 }
 
 export const purchase = (input: UserSelectionType) => {
