@@ -74,9 +74,21 @@ export const purchase = (input: UserSelectionType) => {
     let expectedChangeDenominationAndCoins = [];
     let change;
     /**
+     *  add the amount entered by user to the vending machine
+     */
+        for (const money of input.money) {
+        const item = denominations.findIndex((el) => el.denomination === money.denomination);
+        denominations[item].coins += money.coins;
+    }
+    /**
      * Check if selected item quantity selected is greater that 0
      */
-    if(input.quantity <= 0) return "Please select a quantity of one item or above";
+    if(input.quantity <= 0) {
+        return change = {
+            message: "Please select a quantity of one item or above",
+            returnInputCash: input.money,
+        }
+    }
 
     /**
      * Check if denomination entered by user is supported by vending machine
@@ -97,20 +109,24 @@ export const purchase = (input: UserSelectionType) => {
     /**
      * Check if item is not available in vending machine
      */
-    if (!findItemSlot) return "Item not available in the vending machine";
+    if (!findItemSlot) {
+        return change = {
+            message: "Item not available in the vending machine",
+            returnInputCash: input.money,
+        }
+    }
     /**
      * Check if vending machine has got required item quantity
      */
-    if (input.quantity > findItemSlot[0].items)  return `Selected quantity of ${findItemSlot[0].slot} is more than what is available in the vending machine`;
+    if (input.quantity > findItemSlot[0].items)  {
+        return change = {
+            message: `Selected quantity of ${findItemSlot[0].slot} is more than what is available in the vending machine`,
+            returnInputCash: input.money,
+        }
+    }
         
     let totalExpectedPayment = findItemSlot[0].price * input.quantity;
-    /**
-     * Temporarily add the amount entered by user to the vending machine
-     */
-    for (const money of input.money) {
-        const item = denominations.findIndex((el) => el.denomination === money.denomination);
-        denominations[item].coins += money.coins;
-    }
+
     /**
      * Ensure the amount user has entered is enough to make item purchase
      */
