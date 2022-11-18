@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { summaryTags } from '../utilities/responses';
-import { DenominationCoinsProp, DenominationProp, SlotProp, UserSelectionProp, VendingMachineProp } from './schemas';
+import { DenominationCoinsProp, DenominationProp, DenominationUpdateProp, SlotProp, UserSelectionProp, VendingMachineProp, VendingMachineUpdateProp } from './schemas';
 import {VendingMachineController} from "../controller/vendingMachineController"
 
 export default function (app: FastifyInstance, options: any, done: () => void){
@@ -20,7 +20,7 @@ export default function (app: FastifyInstance, options: any, done: () => void){
     const updateDenominationCoinsRecord = {
         ...summaryTags(maintenanceUserlabel, 'Update vending machine slot price and items'),
         params: DenominationCoinsProp,
-        body: DenominationProp,
+        body: DenominationUpdateProp,
     }
     app.patch('/denomination/:denomination', { schema: updateDenominationCoinsRecord, }, VendingMachineController.updateDenominationCoinsRecord) 
     
@@ -50,7 +50,7 @@ export default function (app: FastifyInstance, options: any, done: () => void){
      const updateRecord = {
         ...summaryTags(maintenanceUserlabel, 'Update vending machine slot price and items'),
         params: SlotProp,
-        body: VendingMachineProp,
+        body: VendingMachineUpdateProp,
     }
     app.patch('/:slot', { schema: updateRecord, }, VendingMachineController.updateRecord)    
         
