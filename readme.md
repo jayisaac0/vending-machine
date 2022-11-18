@@ -2,15 +2,18 @@
 ## **Vending machine**
 
 # Get started
-- Clone project from [http://github.com](http://github.com)
+- Clone project from [https://github.com/jayisaac0/vending-machine](https://github.com/jayisaac0/vending-machine)
 
 - The project takes advantage of Node js fastify framework
 
 # Setup
 Clone project to your local machine
 ```bash
-# Clone project from repository
-git clone github.com/...
+# Clone project from repository via ssl
+git clone git@github.com:jayisaac0/vending-machine.git
+
+# Clone project from repository via http
+git clone https://github.com/jayisaac0/vending-machine.git
 
 # accss project folder
 cd vendine-machine
